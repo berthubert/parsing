@@ -2,10 +2,12 @@
 #include <fmt/ranges.h>
 using namespace std;
 
-// run as ./hello "(1, 2,   0.3, -.12, +12)"
-
 int main(int argc, char** argv)
-{ 
+{
+  if(argc != 2) {
+    fmt::print("Run as: ./escaped '\"hello this is a \\\"string\\\"\"'\n");
+    return 0;
+  }
   peg::parser p(R"(
 QuotedString   <- '"' String '"'
 String <- (! '"' Char )*
