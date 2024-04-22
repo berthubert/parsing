@@ -47,3 +47,39 @@ go_memstats_mspan_sys_bytes NaN
   map<string,string> emp;  
   CHECK(isnan(res["go_memstats_mspan_sys_bytes"].vals[emp].value) == 1);
 }
+
+TEST_CASE("test with large floating point") {
+  PromParser p;
+  auto res = p.parse(R"(# HELP go_memstats_alloc_bytes_total Total number of bytes allocated, even if freed.
+# TYPE go_memstats_alloc_bytes_total counter
+go_memstats_alloc_bytes_total 3.072603244608e+12
+)");
+  REQUIRE(res.size() == 1);
+  map<string,string> emp;  
+  CHECK(res["go_memstats_alloc_bytes_total"].vals[emp].value == 3.072603244608e+12);
+  
+}
+
+TEST_CASE("test with escapes in labels") {
+  PromParser p;
+  auto res = p.parse(R"(# HELP go_gc_duration_seconds A summary of the pause duration of garbage collection cycles.
+# TYPE go_gc_duration_seconds summary
+go_gc_duration_seconds{quantile="0\n1\n\"2\""} 1.3045e-05 1713712554000
+)");
+  REQUIRE(res.size() == 1);
+  map<string,string> emp;  
+  CHECK(res["go_gc_duration_seconds"].vals.begin()->first.begin()->second == "0\n1\n\"2\"");
+  
+}
+
+TEST_CASE("test with uncode") {
+    PromParser p;
+  auto res = p.parse(R"(# HELP apt_upgrades_held Apt packages pëndİng updates but held back.
+# TYPE apt_upgrades_held gauge
+apt_upgrades_held{arch="",origin=""} 0 1713712554000
+)");
+  REQUIRE(res.size() == 1);
+  map<string,string> emp;  
+  CHECK(res["apt_upgrades_held"].help == "Apt packages pëndİng updates but held back.");
+
+}
