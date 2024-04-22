@@ -42,24 +42,4 @@ int main(int argc, char** argv)
     j[r.first] = inner;
   }
   fmt::print("{}\n", j.dump(1));
-    
-  fmt::print("{} {} {} {} - {}\n",
-	     result["nvme_temperature_celsius"].vals.begin()->first.begin()->second,
-	     result["nvme_temperature_celsius"].vals.begin()->second.value,
-	     result["nvme_temperature_celsius"].vals.begin()->second.tstampmsec,
-	     result["nvme_temperature_celsius"].help,
-	     result["nvme_temperature_celsius"].type
-	     );
-
-  fmt::print("{} {} {} {} - {}\n",
-	     result["go_gc_duration_seconds"].vals.begin()->first.begin()->second,
-	     result["go_gc_duration_seconds"].vals.begin()->second.value,
-	     result["go_gc_duration_seconds"].vals.begin()->second.tstampmsec,
-	     result["go_gc_duration_seconds"].help,
-	     result["go_gc_duration_seconds"].type
-	     );
-
-  fmt::print("{}\n", result["go_memstats_mspan_sys_bytes"].vals.begin()->second.value);
-  fmt::print("{}\n", result["go_memstats_mcache_sys_bytes"].vals.begin()->second.value);
-  fmt::print("{}\n", result["go_memstats_mspan_inuse_bytes"].vals.begin()->second.value);    
 }

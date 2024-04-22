@@ -36,7 +36,7 @@ timestamp     <- [+-]?[1-9][0-9]*
     throw runtime_error("Error in grammar\n");
   }
   d_p->set_logger([this](size_t line, size_t col, const string& msg) {
-    d_error = fmt::format("Error on line {}:{} -> {}\n", line, col, msg);
+    d_error = fmt::format("Error on line {}:{} -> {}", line, col, msg);
   });
 
   struct CommentLine
@@ -167,7 +167,7 @@ PromParser::promparseres_t PromParser::parse(const std::string& in)
 {
   PromParser::promparseres_t ret;
   if(!d_p->parse(in, ret))
-    throw runtime_error("Unable to parse prometheus input");
+    throw runtime_error("Unable to parse prometheus input: "+d_error);
   return ret;
 }
 

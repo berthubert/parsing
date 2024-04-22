@@ -1,4 +1,4 @@
-CXXFLAGS:=-std=gnu++17 -Wall -O1 -MMD -MP 
+CXXFLAGS:=-std=gnu++17 -Wall -O1 -MMD -MP  -g
 
 PROGRAMS = hello escaped prom2json promtests
 
