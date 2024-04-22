@@ -1,6 +1,6 @@
 CXXFLAGS:=-std=gnu++17 -Wall -O1 -MMD -MP 
 
-PROGRAMS = hello escaped promdriver
+PROGRAMS = hello escaped prom2json promtests
 
 all: $(PROGRAMS)
 
@@ -15,5 +15,10 @@ hello: hello.o
 escaped: escaped.o
 	$(CXX) -std=gnu++17 $^ -lfmt -o $@ 
 
-promdriver: promparser.o promdriver.o
+prom2json: promparser.o prom2json.o
 	$(CXX) -std=gnu++17 $^ -lfmt -o $@ 
+
+
+promtests: promparser.o promtests.o
+	$(CXX) -std=gnu++17 $^ -lfmt -o $@ 
+
