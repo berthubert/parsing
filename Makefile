@@ -1,6 +1,6 @@
-CXXFLAGS:=-std=gnu++17 -Wall -O1 -MMD -MP
+CXXFLAGS:=-std=gnu++17 -Wall -O1 -MMD -MP 
 
-PROGRAMS = hello escaped
+PROGRAMS = hello escaped promdriver
 
 all: $(PROGRAMS)
 
@@ -13,4 +13,7 @@ hello: hello.o
 	$(CXX) -std=gnu++17 $^ -lfmt -o $@ 
 
 escaped: escaped.o
+	$(CXX) -std=gnu++17 $^ -lfmt -o $@ 
+
+promdriver: promparser.o promdriver.o
 	$(CXX) -std=gnu++17 $^ -lfmt -o $@ 
